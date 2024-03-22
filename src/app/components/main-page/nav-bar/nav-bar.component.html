@@ -1,0 +1,34 @@
+<mat-toolbar color="secondary">
+  <div class = "logo">
+    <img src="assets/images/Jantek-Logo.png" alt="Jantek-Logo">
+  </div>
+
+  <button *ngIf="!isLargeScreen()" mat-icon-button (click)="toggleSidenav()" class="burger-menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- <mat-sidenav #sidenav mode="over" position="end" [opened]="isSidenavOpen" (openedChange)="isSidenavOpen = $event"> -->
+  <mat-sidenav
+    #sidenav
+    [mode]="isLargeScreen() ? 'side' : 'over'"
+    position="end"
+    [opened]="isLargeScreen() || isSidenavOpen"
+    (openedChange)="isSidenavOpen = $event">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let link of navLinks"
+        routerLinkActive="active"
+        [routerLink]="link.path"
+        (click)="toggleSidenav()">
+        {{ link.label }}
+      </a>
+      <a mat-list-item (click)="logoff()">Logoff</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
