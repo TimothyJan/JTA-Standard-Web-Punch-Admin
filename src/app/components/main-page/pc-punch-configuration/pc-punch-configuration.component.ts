@@ -20,9 +20,8 @@ export class PcPunchConfigurationComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this._jantekService.getPunchConfiguration();
     this.configurationForm.controls["logintype"].setValue(
-      this._jantekService.getLoginType()
+      this._jantekService.punchConfiguration.logintype
     );
     this.configurationForm.controls["clocktype"].setValue(
       this._jantekService.getClockType()

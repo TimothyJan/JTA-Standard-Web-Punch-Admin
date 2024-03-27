@@ -20,6 +20,7 @@ export class LoginFormComponent {
   ) {}
 
   onLogin() {
+    this._jantekService.getPunchConfiguration();
     if (this.loginForm.valid) {
       if (this._jantekService.login(this.loginForm.value)) {
         this.router.navigate(['/pc-punch-configuration'])

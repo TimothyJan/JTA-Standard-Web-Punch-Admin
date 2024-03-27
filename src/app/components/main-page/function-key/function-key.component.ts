@@ -4,7 +4,6 @@ import { JantekService } from '../../../services/jantek.service';
 import { FunctionKey } from '../../../models/function-key';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PayCodeDialogComponent } from '../pay-code-dialog/pay-code-dialog.component';
-import { CodeDialogComponent } from '../code-dialog/code-dialog.component';
 
 @Component({
   selector: 'app-function-key',
