@@ -13,65 +13,66 @@ const apiRoot = "http://201.12.20.40/timothy_jan/sqlwebpunch";
 })
 export class JantekService {
   isAuthenticatedChange: Subject<boolean> = new Subject<boolean>();
-  punchConfiguration: PunchConfig = {
-    "status": "OK",
-    "logintype": 1,
-    "clocktype": 1,
-    "checklo": 0,
-    "closetable": 2,
-    "lunchlock": 1,
-    "lunchlen": 30,
-    "breaklock": 0,
-    "breaklen": 0,
-    "fk1": {
-      "fktype": 18,
-      "caption": "View Last Punch",
-      "msg1": "",
-      "msg2": "",
-      "msg3": "",
-      "PC": 0
-    },
-    "fk2": {
-      "fktype": 19,
-      "caption": "View Total Hour",
-      "msg1": "",
-      "msg2": "",
-      "msg3": "",
-      "PC": 0
-    },
-    "fk3": {
-      "fktype": 5,
-      "caption": "Company Change",
-      "msg1": "Enter Company",
-      "msg2": "",
-      "msg3": "",
-      "PC": 0
-    },
-    "fk4": {
-      "fktype": 16,
-      "caption": "Hour Entry",
-      "msg1": "Enter Hour",
-      "msg2": "",
-      "msg3": "",
-      "PC": 1
-    },
-    "fk5": {
-      "fktype": 17,
-      "caption": "Tip Entry",
-      "msg1": "Enter Tip",
-      "msg2": "",
-      "msg3": "",
-      "PC": 30
-    },
-    "fk6": {
-      "fktype": 20,
-      "caption": "Calculated Pay Code",
-      "msg1": "",
-      "msg2": "",
-      "msg3": "",
-      "PC": 24
-    }
-  }
+  punchConfiguration: PunchConfig;
+  // = {
+  //   "status": "OK",
+  //   "logintype": 2,
+  //   "clocktype": 1,
+  //   "checklo": 0,
+  //   "closetable": 2,
+  //   "lunchlock": 1,
+  //   "lunchlen": 30,
+  //   "breaklock": 0,
+  //   "breaklen": 0,
+  //   "fk1": {
+  //     "fktype": 18,
+  //     "caption": "View Last Punch",
+  //     "msg1": "",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 0
+  //   },
+  //   "fk2": {
+  //     "fktype": 19,
+  //     "caption": "View Total Hour",
+  //     "msg1": "",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 0
+  //   },
+  //   "fk3": {
+  //     "fktype": 5,
+  //     "caption": "Company Change",
+  //     "msg1": "Enter Company",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 0
+  //   },
+  //   "fk4": {
+  //     "fktype": 16,
+  //     "caption": "Hour Entry",
+  //     "msg1": "Enter Hour",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 1
+  //   },
+  //   "fk5": {
+  //     "fktype": 17,
+  //     "caption": "Tip Entry",
+  //     "msg1": "Enter Tip",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 30
+  //   },
+  //   "fk6": {
+  //     "fktype": 20,
+  //     "caption": "Calculated Pay Code",
+  //     "msg1": "",
+  //     "msg2": "",
+  //     "msg3": "",
+  //     "PC": 24
+  //   }
+  // }
 
   /** DEMO ONLY */
   demoAdminName:string = "jantek";
@@ -82,16 +83,12 @@ export class JantekService {
     private http: HttpClient
   ) { }
 
-  /** Check user in database and login*/
+  /** Check user in database to login */
   login(form: any): boolean {
     // Admin Authentication
     if(form.username == this.demoAdminName && form.password == this.demoAdminPassword) {
       this.isAuthenticatedChange.next(true);
       this._alertService.openSnackBar("Login Successful");
-      // Get punch configuration
-      this.getPunchConfiguration().subscribe(
-        data => this.punchConfiguration = { ...data}
-      );
       return true;
     }
     this._alertService.openSnackBar("Incorrect Login");

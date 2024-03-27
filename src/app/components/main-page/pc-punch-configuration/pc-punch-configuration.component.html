@@ -1,68 +1,77 @@
-<mat-card>
-  <mat-card-header class="title-center">
-    <mat-card-title>Configuration</mat-card-title>
-  </mat-card-header>
 
-  <form [formGroup]="configurationForm" (ngSubmit)="onSubmit()">
-    <!-- Login Type -->
-    <div class="flex-container">
-      <div class="flex-item">
-        <mat-label>Login Type: </mat-label>
-        <br>
-        <mat-form-field>
-          <mat-select formControlName="logintype">
-            <mat-option [value]="1">Employee # and Card #</mat-option>
-            <mat-option [value]="2">Employee #</mat-option>
-            <mat-option [value]="3">Card #</mat-option>
-          </mat-select>
-        </mat-form-field>
+<div *ngIf="dataFetched; else loadingBlock">
+  <mat-card>
+    <mat-card-header class="title-center">
+      <mat-card-title>Configuration</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="configurationForm" (ngSubmit)="onSubmit()">
+      <!-- Login Type -->
+      <div class="flex-container">
+        <div class="flex-item">
+          <mat-label>Login Type: </mat-label>
+          <br>
+          <mat-form-field>
+            <mat-select formControlName="logintype">
+              <mat-option [value]="1">Employee # and Card #</mat-option>
+              <mat-option [value]="2">Employee #</mat-option>
+              <mat-option [value]="3">Card #</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
 
-    <!-- Clock Type -->
-    <div class="flex-container">
-      <div class="flex-item">
-        <mat-label>Clock Type: </mat-label>
-        <br>
-        <mat-form-field>
-          <mat-select formControlName="clocktype">
-            <mat-option [value]="1">In and Out</mat-option>
-            <mat-option [value]="2">Swipe and Go</mat-option>
-            <mat-option [value]="3">Swipe and Go (Function Key)</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <!-- Clock Type -->
+      <div class="flex-container">
+        <div class="flex-item">
+          <mat-label>Clock Type: </mat-label>
+          <br>
+          <mat-form-field>
+            <mat-select formControlName="clocktype">
+              <mat-option [value]="1">In and Out</mat-option>
+              <mat-option [value]="2">Swipe and Go</mat-option>
+              <mat-option [value]="3">Swipe and Go (Function Key)</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
 
-    <!-- Auto Close -->
-    <div class="flex-container">
-      <div class="flex-item">
-        <mat-label>Auto Close: </mat-label>
-        <br>
-        <mat-form-field>
-          <mat-select formControlName="closetable">
-            <mat-option [value]="1">Auto Close Tables After Five Minutes of Inactivity</mat-option>
-            <mat-option [value]="2">Auto Close Tables After Every Transaction</mat-option>
-            <mat-option [value]="3">Never Auto Close Tables</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <!-- Auto Close -->
+      <div class="flex-container">
+        <div class="flex-item">
+          <mat-label>Auto Close: </mat-label>
+          <br>
+          <mat-form-field>
+            <mat-select formControlName="closetable">
+              <mat-option [value]="1">Auto Close Tables After Five Minutes of Inactivity</mat-option>
+              <mat-option [value]="2">Auto Close Tables After Every Transaction</mat-option>
+              <mat-option [value]="3">Never Auto Close Tables</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
 
-    <!-- Check Lock-Out Profile -->
-    <div class="flex-container">
-      <div class="flex-item">
-        <mat-checkbox formControlName="checklo">Check Lock-Out Profile</mat-checkbox>
+      <!-- Check Lock-Out Profile -->
+      <div class="flex-container">
+        <div class="flex-item">
+          <mat-checkbox formControlName="checklo">Check Lock-Out Profile</mat-checkbox>
+        </div>
       </div>
-    </div>
 
-    <div class="submit-button">
-      <button
-        mat-raised-button
-        type="submit"
-        color="primary">
-        Submit
-      </button>
-    </div>
-  </form>
-</mat-card>
+      <div class="submit-button">
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary">
+          Submit
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<ng-template #loadingBlock>
+  <app-loading-spinner [isLoading]="!dataFetched"></app-loading-spinner>
+</ng-template>
+
+

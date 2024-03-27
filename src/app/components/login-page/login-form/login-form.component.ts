@@ -19,6 +19,7 @@ export class LoginFormComponent {
     private router: Router,
   ) {}
 
+  /** Checks if login is valid and reroutes to pc-punch-configuration page */
   onLogin() {
     this._jantekService.getPunchConfiguration();
     if (this.loginForm.valid) {

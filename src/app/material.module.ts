@@ -15,8 +15,10 @@ import {MatIconModule} from '@angular/material/icon';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
 import {MatDialogModule} from '@angular/material/dialog';
+
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 const modules = [
   MatSlideToggleModule,
@@ -31,7 +33,8 @@ const modules = [
   MatIconModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

@@ -8,8 +8,9 @@ import { JantekService } from '../../../services/jantek.service';
   styleUrl: './pc-punch-configuration.component.css'
 })
 export class PcPunchConfigurationComponent implements OnInit{
+  dataFetched: boolean = false;
   configurationForm: FormGroup = new FormGroup({
-    logintype: new FormControl(1, Validators.required),
+    logintype: new FormControl(3, Validators.required),
     clocktype: new FormControl(1, Validators.required),
     closetable: new FormControl(1, Validators.required),
     checklo: new FormControl(false, Validators.required),
@@ -20,22 +21,28 @@ export class PcPunchConfigurationComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.configurationForm.controls["logintype"].setValue(
-      this._jantekService.punchConfiguration.logintype
-    );
-    this.configurationForm.controls["clocktype"].setValue(
-      this._jantekService.getClockType()
-    );
-    this.configurationForm.controls["closetable"].setValue(
-      this._jantekService.getCloseTable()
-    );
-    /** mat-checkbox return bool, covnert bool to 0 and 1 */
-    if(this._jantekService.getCheckLo()) {
-      this.configurationForm.controls["checklo"].setValue(true);
-    } else {
-      this.configurationForm.controls["checklo"].setValue(false);
-    }
+    this._jantekService.getPunchConfiguration().subscribe(response => {
+      // Get punch configuration
+      this._jantekService.punchConfiguration = { ...response}
 
+      // Assign formcontrol values
+      this.configurationForm.controls["logintype"].setValue(
+        this._jantekService.getLoginType()
+      );
+      this.configurationForm.controls["clocktype"].setValue(
+        this._jantekService.getClockType()
+      );
+      this.configurationForm.controls["closetable"].setValue(
+        this._jantekService.getCloseTable()
+      );
+      /** mat-checkbox return bool, covnert bool to 0 and 1 */
+      if(this._jantekService.getCheckLo()) {
+        this.configurationForm.controls["checklo"].setValue(true);
+      } else {
+        this.configurationForm.controls["checklo"].setValue(false);
+      }
+      this.dataFetched = true;
+    });
   }
 
   onSubmit() {
