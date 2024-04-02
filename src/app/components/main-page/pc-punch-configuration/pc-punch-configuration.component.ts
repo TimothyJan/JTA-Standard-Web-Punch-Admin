@@ -53,7 +53,17 @@ export class PcPunchConfigurationComponent implements OnInit{
       } else {
         this.configurationForm.controls["checklo"].setValue(0);
       }
-      this._jantekService.updatePunchConfiguration(this.configurationForm.value);
+      this._jantekService.updatePunchConfigurationF0(this.configurationForm.value)
+      // .subscribe(
+      //   response => {
+      //     console.log('Response:', response);
+      //     // Handle response here
+      //   },
+      //   error => {
+      //     console.error('Error:', error);
+      //     // Handle error here
+      //   }
+      // );
     }
   }
 

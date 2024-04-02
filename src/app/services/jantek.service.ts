@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertService } from './alert.service';
 import { Observable, Subject } from 'rxjs';
 import { PunchConfig } from '../models/punch-config';
 import { FunctionKey } from '../models/function-key';
 import { PCList } from '../models/pc-list';
+import { JsonF0 } from '../models/json-F0';
 
-const apiRoot = "http://201.12.20.40/timothy_jan/sqlwebpunch";
+const APIROOT = "http://201.12.20.40/timothy_jan/webpunch";
+const COMPANYNAME = "TIMOTHYJANPROJECT";
 
 @Injectable({
   providedIn: 'root'
@@ -14,65 +16,6 @@ const apiRoot = "http://201.12.20.40/timothy_jan/sqlwebpunch";
 export class JantekService {
   isAuthenticatedChange: Subject<boolean> = new Subject<boolean>();
   punchConfiguration: PunchConfig;
-  // = {
-  //   "status": "OK",
-  //   "logintype": 2,
-  //   "clocktype": 1,
-  //   "checklo": 0,
-  //   "closetable": 2,
-  //   "lunchlock": 1,
-  //   "lunchlen": 30,
-  //   "breaklock": 0,
-  //   "breaklen": 0,
-  //   "fk1": {
-  //     "fktype": 18,
-  //     "caption": "View Last Punch",
-  //     "msg1": "",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 0
-  //   },
-  //   "fk2": {
-  //     "fktype": 19,
-  //     "caption": "View Total Hour",
-  //     "msg1": "",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 0
-  //   },
-  //   "fk3": {
-  //     "fktype": 5,
-  //     "caption": "Company Change",
-  //     "msg1": "Enter Company",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 0
-  //   },
-  //   "fk4": {
-  //     "fktype": 16,
-  //     "caption": "Hour Entry",
-  //     "msg1": "Enter Hour",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 1
-  //   },
-  //   "fk5": {
-  //     "fktype": 17,
-  //     "caption": "Tip Entry",
-  //     "msg1": "Enter Tip",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 30
-  //   },
-  //   "fk6": {
-  //     "fktype": 20,
-  //     "caption": "Calculated Pay Code",
-  //     "msg1": "",
-  //     "msg2": "",
-  //     "msg3": "",
-  //     "PC": 24
-  //   }
-  // }
 
   /** DEMO ONLY */
   demoAdminName:string = "jantek";
@@ -103,7 +46,12 @@ export class JantekService {
 
   /** Https request to get punch configuration from server */
   getPunchConfiguration(): Observable<PunchConfig> {
-    return this.http.get<PunchConfig>(`${apiRoot}/swp_getpunchcfg.asp`);
+    const options = {
+      params: {
+        Company: COMPANYNAME,
+      }
+    };
+    return this.http.get<PunchConfig>(`${APIROOT}/wp_getpunchcfg.asp`, options);
   }
 
   /** Return current Login Type */
@@ -124,12 +72,6 @@ export class JantekService {
   /** Returns current Check Lock-Out Profile */
   getCheckLo(): number {
     return this.punchConfiguration.checklo;
-  }
-
-  /** Https request to post punch configuration to server */
-  updatePunchConfiguration(form: any) {
-    console.log(form);
-    this._alertService.openSnackBar("Configuration Saved!");
   }
 
   /** Returns fk1 */
@@ -162,9 +104,97 @@ export class JantekService {
     return this.punchConfiguration.fk6;
   }
 
+  /** Incomplete */
+  /** Https request to post punch configuration items "logintype", "clocktype" and "checklo" properties to server */
+  updatePunchConfigurationF0(form: any) {
+    let data:JsonF0 = {
+      "status": "OK",
+      "logintype": form["logintype"],
+      "clocktype": form["clocktype"],
+      "checklo": form["checklo"],
+      "closetable": form["closetable"],
+      "lunchlock": this.punchConfiguration.lunchlock,
+      "lunchlen": this.punchConfiguration.lunchlen,
+      "breaklock": this.punchConfiguration.breaklock,
+      "breaklen": this.punchConfiguration.breaklen
+    }
+    const options = {
+      params: {
+        Company: COMPANYNAME,
+        Page:"F0",
+        config:data
+      }
+    };
+    // Set headers if needed
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
+    });
+    // View link being used
+    console.log(`${APIROOT}/wp_setpunchcfg.asp`, options, {headers});
+    // POST
+    this.http.post(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
+      response => {
+        console.log('Response from server:', response);
+        // Handle response as needed
+      },
+      error => {
+        console.error('Error sending data:', error);
+        // Handle error as needed
+      }
+    );
+    this._alertService.openSnackBar("Configuration Saved!");
+  }
+
+  /** Incomplete */
   /** Https request to post function key update */
   functionKeyUpdate(form: any) {
-    console.log(form);
+    let data: FunctionKey = {
+      "fktype": form["fktype"],
+      "caption": form["caption"] || "",
+      "msg1": form["msg1"] || 0,
+      "msg2": form["msg2"] || 0,
+      "msg3": form["msg3"] || 0,
+      "PC": form["PC"] || 0
+    };
+    console.log(data);
+    switch(form['functionKeyNumber']) {
+      case 1:
+        let pageParameter = {
+          Company: COMPANYNAME,
+          Page:"F1",
+          "fk1": {data}
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, pageParameter);
+        this.http.post(`${APIROOT}/wp_setpunchcfg.asp`, pageParameter).subscribe(
+          response => {
+            console.log('Response from server:', response);
+            // Handle response as needed
+          },
+          error => {
+            console.error('Error sending data:', error);
+            // Handle error as needed
+          }
+        );
+        break;
+      case 2:
+        console.log("Function 2: ", form);
+        break;
+      case 3:
+        console.log("Function 3: ", form);
+        break;
+      case 4:
+        console.log("Function 4: ", form);
+        break;
+      case 5:
+        console.log("Function 5: ", form);
+        break;
+      case 6:
+        console.log("Function 6: ", form);
+        break;
+    }
     this._alertService.openSnackBar(`Function Key ${form['functionKeyNumber']} Saved!`);
   }
 
@@ -175,44 +205,52 @@ export class JantekService {
       case 16: {
         const options = {
           params: {
-            Company: "TIMOTHYPROJECT",
+            Company: COMPANYNAME,
             pctype: "HNC",
             order:1,
             startloc:1,
             listsize:100
           }
         };
-        return this.http.get<PCList>(`${apiRoot}/swp_GetPcList.asp`, options);
+        return this.http.get<PCList>(`${APIROOT}/wp_GetPcList.asp`, options);
       }
       /** "ED" - Earning/Deduction code (employee enters dollar amount) */
       case 17: {
         const options = {
           params: {
-            Company: "TIMOTHYPROJECT",
+            Company: COMPANYNAME,
             pctype: "ED",
             order:1,
             startloc:1,
             listsize:100
           }
         };
-        return this.http.get<PCList>(`${apiRoot}/swp_GetPcList.asp`, options);
+        return this.http.get<PCList>(`${APIROOT}/wp_GetPcList.asp`, options);
       }
       /** "HC" - Hourly Calculated (excluding pacyode 0) */
       case 20: {
         const options = {
           params: {
-            Company: "TIMOTHYPROJECT",
+            Company: COMPANYNAME,
             pctype: "HC",
             order:1,
             startloc:1,
             listsize:100
           }
         };
-        return this.http.get<PCList>(`${apiRoot}/swp_GetPcList.asp`, options);
+        return this.http.get<PCList>(`${APIROOT}/wp_GetPcList.asp`, options);
       }
       default: {
-        console.log("switch default");
-        return this.http.get<PCList>(`${apiRoot}/swp_GetPcList.asp?Company=TIMOTHYJANPROJECT&pctype=HNC&order=1&startloc=1&listsize=100`);
+        const options = {
+          params: {
+            Company: COMPANYNAME,
+            pctype: "HNC",
+            order:1,
+            startloc:1,
+            listsize:100
+          }
+        };
+        return this.http.get<PCList>(`${APIROOT}/wp_GetPcList.asp`, options);
       }
     }
   }
