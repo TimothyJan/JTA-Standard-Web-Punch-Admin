@@ -126,15 +126,17 @@ export class JantekService {
         config:data
       }
     };
+
     // Set headers if needed
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "*",
-      "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
-    });
+    // const headers = new HttpHeaders({
+    //   "Content-Type": "application/json",
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Methods": "*",
+    //   "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
+    // });
+
     // View link being used
-    console.log(`${APIROOT}/wp_setpunchcfg.asp`, options, {headers});
+    console.log(`${APIROOT}/wp_setpunchcfg.asp`, options);
     // POST
     this.http.post(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
       response => {
