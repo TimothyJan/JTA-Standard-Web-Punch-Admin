@@ -7,8 +7,9 @@ import { FunctionKey } from '../models/function-key';
 import { PCList } from '../models/pc-list';
 import { JsonF0 } from '../models/json-F0';
 
-const APIROOT = "http://201.12.20.40/timothy_jan/webpunch/api";
+// const APIROOT = "http://201.12.20.40/timothy_jan/webpunch/api";
 // const APIROOT = "http://newdev.jantek.net/webpunch/api";
+const APIROOT = "./api"
 const COMPANYNAME = "TIMOTHYJANPROJECT";
 
 @Injectable({
