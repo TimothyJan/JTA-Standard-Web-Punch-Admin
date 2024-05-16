@@ -160,10 +160,10 @@ export class JantekService {
             config: JSON.stringify(fk1data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -188,10 +188,10 @@ export class JantekService {
             config: JSON.stringify(fk2data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -216,10 +216,10 @@ export class JantekService {
             config: JSON.stringify(fk3data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -244,10 +244,10 @@ export class JantekService {
             config: JSON.stringify(fk4data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -272,10 +272,10 @@ export class JantekService {
             config: JSON.stringify(fk5data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -300,10 +300,10 @@ export class JantekService {
             config: JSON.stringify(fk6data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options);
+        // console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options).subscribe(
           response => {
-            // console.log('Response from server:', response);
+            console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);

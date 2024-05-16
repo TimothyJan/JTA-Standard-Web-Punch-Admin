@@ -17,8 +17,8 @@ export class FunctionKeyComponent implements OnInit{
   msg3Disabled: boolean = true;
 
   @Input() functionKeyNumber: number = 0;
-  @Input() fk:FunctionKey = {
-    "fktype": 1,
+  fk:FunctionKey = {
+    "fktype": 0,
     "caption": "",
     "msg1": "",
     "msg2": "",
@@ -42,6 +42,59 @@ export class FunctionKeyComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    switch(this.functionKeyNumber) {
+      case 1:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk1;
+          this.setFunctionKeyForm();
+        });
+        break;
+      case 2:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk2;
+          this.setFunctionKeyForm();
+        });
+        break;
+      case 3:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk3;
+          this.setFunctionKeyForm();
+        });
+        break;
+      case 4:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk4;
+          this.setFunctionKeyForm();
+        });
+        break;
+      case 5:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk5;
+          this.setFunctionKeyForm();
+        });
+        break;
+      case 6:
+        this._jantekService.getPunchConfiguration().subscribe(response => {
+          // Get punch configuration
+          this._jantekService.punchConfiguration = { ...response};
+          this.fk = response.fk6;
+          this.setFunctionKeyForm();
+        });
+        break;
+    }
+  }
+
+  setFunctionKeyForm(): void {
     this.functionKeyForm.controls["functionKeyNumber"].setValue(this.functionKeyNumber);
     this.functionKeyForm.controls["fktype"].setValue(this.fk["fktype"]);
     this.functionKeyForm.controls["caption"].setValue(this.fk["caption"]);

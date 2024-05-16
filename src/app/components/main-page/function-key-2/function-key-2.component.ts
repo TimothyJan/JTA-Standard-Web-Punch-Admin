@@ -7,21 +7,6 @@ import { JantekService } from '../../../services/jantek.service';
   templateUrl: './function-key-2.component.html',
   styleUrl: './function-key-2.component.css'
 })
-export class FunctionKey2Component implements OnInit{
-  fk2: FunctionKey = {
-    "fktype": 1,
-    "caption": "",
-    "msg1": "",
-    "msg2": "",
-    "msg3": "",
-    "PC": 0
-  };
-
-  constructor(
-    private _jantekService: JantekService
-  ) {}
-
-  ngOnInit(): void {
-    this.fk2 = this._jantekService.getFK2();
-  }
+export class FunctionKey2Component{
+  constructor() {}
 }
