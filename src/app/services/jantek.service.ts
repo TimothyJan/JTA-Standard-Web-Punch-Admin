@@ -155,15 +155,15 @@ export class JantekService {
         let fk1data = {
           "fk1": {data}
         }
-        let options = {
+        let fk1Options = {
           params: {
             Company: COMPANYNAME,
             Page:"F1",
             config: JSON.stringify(fk1data)
           }
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, options);
-        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options).subscribe(
           response => {
             console.log('Response from server:', response);
           },
@@ -173,19 +173,109 @@ export class JantekService {
         );
         break;
       case 2:
-        console.log("Function 2: ", form);
+        let fk2data = {
+          "fk2": {data}
+        }
+        let fk2Options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F2",
+            config: JSON.stringify(fk2data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options).subscribe(
+          response => {
+            console.log('Response from server:', response);
+          },
+          error => {
+            console.error('Error sending data:', error);
+          }
+        );
         break;
       case 3:
-        console.log("Function 3: ", form);
+        let fk3data = {
+          "fk3": {data}
+        }
+        let fk3Options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F3",
+            config: JSON.stringify(fk3data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options).subscribe(
+          response => {
+            console.log('Response from server:', response);
+          },
+          error => {
+            console.error('Error sending data:', error);
+          }
+        );
         break;
       case 4:
-        console.log("Function 4: ", form);
+        let fk4data = {
+          "fk4": {data}
+        }
+        let fk4Options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F4",
+            config: JSON.stringify(fk4data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options).subscribe(
+          response => {
+            console.log('Response from server:', response);
+          },
+          error => {
+            console.error('Error sending data:', error);
+          }
+        );
         break;
       case 5:
-        console.log("Function 5: ", form);
+        let fk5data = {
+          "fk5": {data}
+        }
+        let fk5Options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F5",
+            config: JSON.stringify(fk5data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options).subscribe(
+          response => {
+            console.log('Response from server:', response);
+          },
+          error => {
+            console.error('Error sending data:', error);
+          }
+        );
         break;
       case 6:
-        console.log("Function 6: ", form);
+        let fk6data = {
+          "fk6": {data}
+        }
+        let fk6Options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F6",
+            config: JSON.stringify(fk6data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options).subscribe(
+          response => {
+            console.log('Response from server:', response);
+          },
+          error => {
+            console.error('Error sending data:', error);
+          }
+        );
         break;
     }
     this._alertService.openSnackBar(`Function Key ${form['functionKeyNumber']} Saved!`);
