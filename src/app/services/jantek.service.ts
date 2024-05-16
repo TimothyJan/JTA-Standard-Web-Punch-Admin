@@ -129,7 +129,7 @@ export class JantekService {
 
     this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
       response => {
-        console.log('Response from server:', response);
+        // console.log('Response from server:', response);
       },
       error => {
         console.error('Error sending data:', error);
@@ -141,19 +141,17 @@ export class JantekService {
   /** Incomplete */
   /** Https request to post function key update */
   functionKeyUpdate(form: any) {
-    let data: FunctionKey = {
-      "fktype": form["fktype"],
-      "caption": form["caption"] || "",
-      "msg1": form["msg1"] || 0,
-      "msg2": form["msg2"] || 0,
-      "msg3": form["msg3"] || 0,
-      "PC": form["PC"] || 0
-    };
-    console.log(data);
     switch(form['functionKeyNumber']) {
       case 1:
         let fk1data = {
-          "fk1": {data}
+          "fk1": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk1Options = {
           params: {
@@ -165,7 +163,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk1Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -174,7 +172,14 @@ export class JantekService {
         break;
       case 2:
         let fk2data = {
-          "fk2": {data}
+          "fk2": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk2Options = {
           params: {
@@ -186,7 +191,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk2Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -195,7 +200,14 @@ export class JantekService {
         break;
       case 3:
         let fk3data = {
-          "fk3": {data}
+          "fk3": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk3Options = {
           params: {
@@ -207,7 +219,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk3Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -216,7 +228,14 @@ export class JantekService {
         break;
       case 4:
         let fk4data = {
-          "fk4": {data}
+          "fk4": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk4Options = {
           params: {
@@ -228,7 +247,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk4Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -237,7 +256,14 @@ export class JantekService {
         break;
       case 5:
         let fk5data = {
-          "fk5": {data}
+          "fk5": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk5Options = {
           params: {
@@ -249,7 +275,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk5Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
@@ -258,7 +284,14 @@ export class JantekService {
         break;
       case 6:
         let fk6data = {
-          "fk6": {data}
+          "fk6": {
+            "fktype": form["fktype"],
+            "caption": form["caption"] || "",
+            "msg1": form["msg1"] || 0,
+            "msg2": form["msg2"] || 0,
+            "msg3": form["msg3"] || 0,
+            "PC": form["PC"] || 0
+          }
         }
         let fk6Options = {
           params: {
@@ -270,7 +303,7 @@ export class JantekService {
         console.log(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options);
         this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, fk6Options).subscribe(
           response => {
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
           },
           error => {
             console.error('Error sending data:', error);
