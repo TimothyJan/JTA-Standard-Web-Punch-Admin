@@ -7,9 +7,9 @@ import { FunctionKey } from '../models/function-key';
 import { PCList } from '../models/pc-list';
 import { JsonF0 } from '../models/json-F0';
 
-// const APIROOT = "http://201.12.20.40/timothy_jan/webpunch/api";
+const APIROOT = "http://201.12.20.40/timothy_jan/webpunch/api";
 // const APIROOT = "http://newdev.jantek.net/webpunch/api";
-const APIROOT = "./"
+// const APIROOT = "./api"
 const COMPANYNAME = "TIMOTHYJANPROJECT";
 
 @Injectable({
@@ -106,7 +106,6 @@ export class JantekService {
     return this.punchConfiguration.fk6;
   }
 
-  /** Incomplete */
   /** Https request to post punch configuration items "logintype", "clocktype" and "checklo" properties to server */
   updatePunchConfigurationF0(form: any) {
     let data:JsonF0 = {
@@ -119,34 +118,21 @@ export class JantekService {
       "lunchlen": this.punchConfiguration.lunchlen,
       "breaklock": this.punchConfiguration.breaklock,
       "breaklen": this.punchConfiguration.breaklen
-    }
+    };
     const options = {
       params: {
         Company: COMPANYNAME,
         Page:"F0",
-        config:data
+        config: JSON.stringify(data)
       }
     };
 
-    // Set headers if needed
-    // const headers = new HttpHeaders({
-    //   "Content-Type": "application/json",
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Methods": "*",
-    //   "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
-    // });
-
-    // View link being used
-    console.log(`${APIROOT}/wp_setpunchcfg.asp`, options);
-    // POST
-    this.http.post(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
+    this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
       response => {
         console.log('Response from server:', response);
-        // Handle response as needed
       },
       error => {
         console.error('Error sending data:', error);
-        // Handle error as needed
       }
     );
     this._alertService.openSnackBar("Configuration Saved!");
@@ -166,20 +152,23 @@ export class JantekService {
     console.log(data);
     switch(form['functionKeyNumber']) {
       case 1:
-        let pageParameter = {
-          Company: COMPANYNAME,
-          Page:"F1",
+        let fk1data = {
           "fk1": {data}
         }
-        console.log(`${APIROOT}/wp_setpunchcfg.asp`, pageParameter);
-        this.http.post(`${APIROOT}/wp_setpunchcfg.asp`, pageParameter).subscribe(
+        let options = {
+          params: {
+            Company: COMPANYNAME,
+            Page:"F1",
+            config: JSON.stringify(fk1data)
+          }
+        }
+        console.log(`${APIROOT}/wp_setpunchcfg.asp`, options);
+        this.http.get(`${APIROOT}/wp_setpunchcfg.asp`, options).subscribe(
           response => {
             console.log('Response from server:', response);
-            // Handle response as needed
           },
           error => {
             console.error('Error sending data:', error);
-            // Handle error as needed
           }
         );
         break;
