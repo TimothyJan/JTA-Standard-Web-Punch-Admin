@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PayCode } from '../../../models/pay-code';
 import { JantekService } from '../../../services/jantek.service';
@@ -22,9 +22,33 @@ export class PayCodeDialogComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this._dialogRef.updateSize('50%');
+    this.dialogResize();
+    this.getPayCodes();
+  }
 
-    // Load list of pay codes into payCodeList
+  /** Dialog selection */
+  // onPayCodeDialogChange(event:any) {
+  //   // console.log(event);
+  // }
+
+  // Resizes dialog based on window width
+  dialogResize(): void {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width > 720) {
+      this._dialogRef.updateSize('40%');
+    } else {
+      this._dialogRef.updateSize('80%');
+    }
+  }
+
+  /** HostListener to update the flag on window resize */
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.dialogResize();
+  }
+
+  // Load list of pay codes into payCodeList
+  getPayCodes(): void {
     this._jantekService.getPayCodes(this.data.fktype).subscribe(
       data => {
         for(var index = 0; index<data["list"].length; index++) {
@@ -38,11 +62,6 @@ export class PayCodeDialogComponent implements OnInit{
       }
     );
   }
-
-  /** Dialog selection */
-  // onPayCodeDialogChange(event:any) {
-  //   // console.log(event);
-  // }
 
   /** Send selected pay code data to function-key */
   savePayCodeDialog(): void {
